@@ -17,14 +17,14 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "ssh://git@github.com:zenhuzaini/emarsys-sdk-warapper-plugin.git",
-    "directory":  "@zenhuzaini/emarsys-sdk-warapper-plugin"
+    "url": "git+ssh://git@github.com/zenhuzaini/emarsys-sdk-warapper-plugin.git",
+    "directory": "@zenhuzaini/emarsys-sdk-warapper-plugin"
   },
   "bugs": {
     "url": "https://github.com/zenhuzaini/emarsys-sdk-warapper-plugin.git/issues"
   },
- "publishConfig": {
-  "registry": "https://npm.pkg.github.com/zenhuzaini"
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/zenhuzaini"
   },
   "keywords": [
     "capacitor",
@@ -79,5 +79,9 @@
     "android": {
       "src": "android"
     }
+  },
+  "homepage": "https://github.com/zenhuzaini/emarsys-sdk-warapper-plugin#readme",
+  "directories": {
+    "example": "example"
   }
 }
