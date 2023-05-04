@@ -10,7 +10,6 @@ public class EmarsysSDKCustom {
     }
 
     public String initializeEmarsys(String value) {
-        Log.i("initializeEmarsys", value);
         return value;
     }
 
