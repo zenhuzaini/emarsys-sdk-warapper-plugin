@@ -11,6 +11,8 @@ import com.getcapacitor.annotation.CapacitorPlugin;
 import com.emarsys.Emarsys;
 import com.emarsys.config.EmarsysConfig;
 
+import com.emarsys.inapp.ui.InlineInAppView;
+
 @CapacitorPlugin(name = "EmarsysSDKCustom")
 public class EmarsysSDKCustomPlugin extends Plugin {
     public EmarsysConfig config;
@@ -33,7 +35,8 @@ public class EmarsysSDKCustomPlugin extends Plugin {
 
         Emarsys.setup(config);
         Log.d("Emersys", "EMERSYS has been configured... ");
-
+        InlineInAppView inlineInAppView = new InlineInAppView(getContext());
+        inlineInAppView.loadInApp("Emarsys_Inapp");
 //        emarsysPushNotification.createNotificationChannel();
     }
 
