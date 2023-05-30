@@ -1,22 +1,20 @@
 package com.lla.emarsyssdk;
 
 import android.util.Log;
-
+import com.emarsys.Emarsys;
+import com.emarsys.config.EmarsysConfig;
+import com.emarsys.inapp.ui.InlineInAppView;
 import com.getcapacitor.JSObject;
 import com.getcapacitor.Plugin;
 import com.getcapacitor.PluginCall;
 import com.getcapacitor.PluginMethod;
 import com.getcapacitor.annotation.CapacitorPlugin;
 
-import com.emarsys.Emarsys;
-import com.emarsys.config.EmarsysConfig;
-
-import com.emarsys.inapp.ui.InlineInAppView;
-
 @CapacitorPlugin(name = "EmarsysSDKCustom")
 public class EmarsysSDKCustomPlugin extends Plugin {
-    public EmarsysConfig config;
 
+    public EmarsysConfig config;
+    public String emarrsysDeviceInformationConfig;
     private EmarsysSDKCustom implementation = new EmarsysSDKCustom();
     EmarsysPushNotification emarsysPushNotification = new EmarsysPushNotification();
 
@@ -24,7 +22,8 @@ public class EmarsysSDKCustomPlugin extends Plugin {
     public void load() {
         Log.d("INITIALIZE EMARSYS", "LOADING ...");
 
-        config = new EmarsysConfig.Builder()
+        config =
+            new EmarsysConfig.Builder()
                 .application(this.getActivity().getApplication()) //
                 .applicationCode("EMSD5-99166")
                 .merchantId("1F634D68EE4C9C7A")
@@ -37,7 +36,7 @@ public class EmarsysSDKCustomPlugin extends Plugin {
         Log.d("Emersys", "EMERSYS has been configured... ");
         InlineInAppView inlineInAppView = new InlineInAppView(getContext());
         inlineInAppView.loadInApp("Emarsys_Inapp");
-//        emarsysPushNotification.createNotificationChannel();
+        //        emarsysPushNotification.createNotificationChannel();
     }
 
     @PluginMethod
@@ -49,10 +48,9 @@ public class EmarsysSDKCustomPlugin extends Plugin {
         call.resolve(ret);
     }
 
-
     // setPushTokenFirebase
     @PluginMethod
-    public void setPushTokenFirebase(PluginCall call){
+    public void setPushTokenFirebase(PluginCall call) {
         String value = call.getString("value");
         System.out.println("get initialization 1 " + value);
 
@@ -66,7 +64,7 @@ public class EmarsysSDKCustomPlugin extends Plugin {
     }
 
     @PluginMethod
-    public void setUser(PluginCall call){
+    public void setUser(PluginCall call) {
         String value = call.getString("value");
         System.out.println("SET USER IN THE PLUGIN " + value);
 
@@ -74,10 +72,20 @@ public class EmarsysSDKCustomPlugin extends Plugin {
     }
 
     @PluginMethod
-    public void clearUser(PluginCall call){
+    public void clearUser(PluginCall call) {
         String value = call.getString("value");
         System.out.println("CLEAR USER IN THE PLUGIN " + value);
 
         emarsysPushNotification.clearContactUser();
+    }
+
+    @PluginMethod
+    public void getDeviceInformation(PluginCall call) {
+        System.out.println("SET get device this.emarrsysDeviceInformationConfig  " + this.emarrsysDeviceInformationConfig);
+        String value = this.emarrsysDeviceInformationConfig;
+
+        JSObject ret = new JSObject();
+        ret.put("value", implementation.echo(value));
+        call.resolve(ret);
     }
 }
