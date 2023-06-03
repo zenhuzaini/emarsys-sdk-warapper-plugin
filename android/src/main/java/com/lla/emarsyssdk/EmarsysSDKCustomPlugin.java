@@ -4,11 +4,15 @@ import android.util.Log;
 import com.emarsys.Emarsys;
 import com.emarsys.config.EmarsysConfig;
 import com.emarsys.inapp.ui.InlineInAppView;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.getcapacitor.JSObject;
 import com.getcapacitor.Plugin;
 import com.getcapacitor.PluginCall;
 import com.getcapacitor.PluginMethod;
 import com.getcapacitor.annotation.CapacitorPlugin;
+
+import java.io.IOException;
+import java.util.Map;
 
 @CapacitorPlugin(name = "EmarsysSDKCustom")
 public class EmarsysSDKCustomPlugin extends Plugin {
@@ -87,5 +91,28 @@ public class EmarsysSDKCustomPlugin extends Plugin {
         JSObject ret = new JSObject();
         ret.put("value", implementation.echo(value));
         call.resolve(ret);
+    }
+
+    @PluginMethod
+    public void trackEvent(PluginCall call) {
+        String eventName = call.getString("eventName");
+        System.out.println("get value track " + eventName);
+        String eventAttributes = call.getString("eventAttributes");
+        System.out.println("get  eventAttributes obj " + eventAttributes);
+        ObjectMapper mapper = new ObjectMapper();
+
+        try{
+            Map<String, String> mappedEventAtributes = mapper.readValue(eventAttributes, Map.class);
+            System.out.println("this is the maaapp "+ mappedEventAtributes);
+
+            //todo
+            JSObject ret = new JSObject();
+            assert eventName != null;
+            Emarsys.trackCustomEvent(eventName, mappedEventAtributes);
+
+            call.resolve(ret);
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -62,4 +62,7 @@ dependencies {
 
     implementation 'com.emarsys:emarsys-sdk:3.4.0'
     implementation 'com.emarsys:emarsys-firebase:3.4.0'
+
+    //to change jsonObject to java
+    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.13.4'
 }

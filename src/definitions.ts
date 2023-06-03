@@ -47,5 +47,7 @@ export interface EmarsysSDKCustomPlugin {
   getDeviceInformation(options?: {
     value?: string;
   }): Promise<{ value: string }>;
+
+  trackEvent(options?: { eventName: string, eventAttributes: any }): Promise<{ value: string }>;
   // ---------------------------
 }
