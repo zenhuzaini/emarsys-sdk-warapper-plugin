@@ -7,6 +7,8 @@ export class EmarsysSDKCustomWeb extends WebPlugin {
   }
   async getUUID(value: string): Promise<{ value: string }> {
     console.log('ECHO', value);
+
+   
     return {value:value};
   }
 }

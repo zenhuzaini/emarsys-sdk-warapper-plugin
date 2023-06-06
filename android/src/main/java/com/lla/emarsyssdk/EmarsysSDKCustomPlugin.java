@@ -115,4 +115,16 @@ public class EmarsysSDKCustomPlugin extends Plugin {
             e.printStackTrace();
         }
     }
+
+    @PluginMethod
+    public void loadTheInapp(PluginCall call) {
+        String inAppName = call.getString("inAppName");
+        System.out.println("this is the inAppName "+ inAppName);
+
+        InlineInAppView inlineInAppView = new InlineInAppView(getContext());
+        inlineInAppView.loadInApp(inAppName);
+
+        JSObject ret = new JSObject();
+        call.resolve(ret);
+    }
 }

@@ -51,3 +51,6 @@ export interface EmarsysSDKCustomPlugin {
   trackEvent(options?: { eventName: string, eventAttributes: any }): Promise<{ value: string }>;
   // ---------------------------
 }
+
+
+
