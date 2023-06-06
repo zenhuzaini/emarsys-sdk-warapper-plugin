@@ -117,7 +117,7 @@ public class EmarsysSDKCustomPlugin extends Plugin {
     }
 
     @PluginMethod
-    public void loadTheInapp(PluginCall call) {
+    public void loadInlineInapp(PluginCall call) {
         String inAppName = call.getString("inAppName");
         System.out.println("this is the inAppName "+ inAppName);
 
