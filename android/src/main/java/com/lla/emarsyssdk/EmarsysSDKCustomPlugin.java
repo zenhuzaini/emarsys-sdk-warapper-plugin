@@ -21,6 +21,7 @@ public class EmarsysSDKCustomPlugin extends Plugin {
     public String emarrsysDeviceInformationConfig;
     private EmarsysSDKCustom implementation = new EmarsysSDKCustom();
     EmarsysPushNotification emarsysPushNotification = new EmarsysPushNotification();
+    InlineInAppView inlineInAppView;
 
     @Override
     public void load() {
@@ -36,9 +37,10 @@ public class EmarsysSDKCustomPlugin extends Plugin {
 
         Log.d("Emersys", config.toString());
 
+        this.emarrsysDeviceInformationConfig = Emarsys.getConfig().getHardwareId();
         Emarsys.setup(config);
         Log.d("Emersys", "EMERSYS has been configured... ");
-        InlineInAppView inlineInAppView = new InlineInAppView(getContext());
+        inlineInAppView = new InlineInAppView(getContext());
         inlineInAppView.loadInApp("Emarsys_Inapp");
         //        emarsysPushNotification.createNotificationChannel();
     }
@@ -121,8 +123,7 @@ public class EmarsysSDKCustomPlugin extends Plugin {
         String inAppName = call.getString("inAppName");
         System.out.println("this is the inAppName "+ inAppName);
 
-        InlineInAppView inlineInAppView = new InlineInAppView(getContext());
-        inlineInAppView.loadInApp(inAppName);
+        this.inlineInAppView.loadInApp(inAppName);
 
         JSObject ret = new JSObject();
         call.resolve(ret);
